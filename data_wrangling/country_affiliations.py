@@ -20,7 +20,7 @@ with open(r'C:\\projects\\data_wrangling\\affiliations.csv', 'r', errors='ignore
             countries.remove(countries[0])
             countries.remove(countries[0])
         elif len(countries) == 2:
-            countries.remove(countries[0])
+            countries.remove(countries[0]) 
         #print(countries[0][len(countries[0])-1])
         with open(r'C:\\projects\\data_wrangling\\usa_states.csv', 'r', errors='ignore') as f:
             reader2 = csv.reader(f)
@@ -48,7 +48,28 @@ with open(r'C:\\projects\\data_wrangling\\affiliations.csv', 'r', errors='ignore
                 elif countries[0][1] == 'K':
                     countries = [countries[0].replace(countries[0], 'United Kingdom') for countries[0] in countries]
                 i += 1
-            print(countries)
+            #print(countries)
+            with open(r'C:\\projects\\data_wrangling\\unique_countries.csv', 'r', errors='ignore') as fl:
+                reader3 = csv.reader(fl)
+                next(reader3)
+                info = list(reader3)
+                #print(countries)
+                #print(info[0][0])
+                j = 0
+                while j < len(info):
+                    if countries[len(countries)-1] == 'Africa':
+                        countries = [countries[0].replace(countries[0], 'South Africa') for countries[0] in countries]
+                    if countries[len(countries)-1] == 'Zealand':
+                        countries = [countries[0].replace(countries[0], 'New Zealand') for countries[0] in countries]
+                    if countries[len(countries)-1] == 'Republic':
+                        countries = [countries[0].replace(countries[0], 'Czech Republic') for countries[0] in countries]
+                    if countries[len(countries)-1] == 'Rico':
+                        countries = [countries[0].replace(countries[0], 'Puerto Rico') for countries[0] in countries]
+                    if countries[len(countries)-1] == info[j][0]:
+                        countries = [countries[0].replace(countries[0], info[j][0] + u'\u2713') for countries[0] in countries]
+                    j += 1   
+                print(countries[0])
+            fl.close()
         f.close() 
 file.close()
 
